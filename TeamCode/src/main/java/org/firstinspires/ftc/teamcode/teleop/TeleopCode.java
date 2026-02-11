@@ -11,13 +11,13 @@ public class TeleopCode extends LinearOpMode {
     @Override
     public void runOpMode() {
         // the deviceName is the device as labeled on the control hub
-        // //DcMotorEx motor = hardwareMap.get(DcMotorEx.class, "motorName");
+        DcMotorEx motor = hardwareMap.get(DcMotorEx.class, "motorName");
 
         waitForStart();
 
         while (opModeIsActive()) {
             telemetry.update();
-            // motor.setPower(0.1); // make that motor move!
+            motor.setPower(-0.1); // make that motor move!
         }
     }
 }
