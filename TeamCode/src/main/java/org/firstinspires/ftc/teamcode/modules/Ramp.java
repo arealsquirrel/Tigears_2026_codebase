@@ -1,4 +1,7 @@
 package org.firstinspires.ftc.teamcode.modules;
 
-public class movement {
+public class Ramp {
+    public Ramp() {
+
+    }
 }
