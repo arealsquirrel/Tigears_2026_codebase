@@ -70,4 +70,72 @@ public class Turret {
         }
         return null;
     }
+
+    /**
+     * move this somewhere if u wanna.
+     */
+    static class tp {
+        double theta,phi;
+        tp(double t, double p) {
+            theta = t;
+            phi = p;
+        }
+    }
+    
+    static class vec {
+        double x,y,z;
+        vec(double X,double Y,double Z) {
+            x=X;y=Y;z=Z;
+        }
+    }
+
+    static vec add(vec a, vec b) {
+        return new vec(a.x+b.x,a.y+b.y,a.z+b.z);
+    }
+    static vec sub(vec a, vec b) {
+        return new vec(a.x-b.x,a.y-b.y,a.z-b.z);
+    }
+    static vec mult_scalar(vec a, double b) {
+        return new vec(a.x*b, a.y*b, a.z*b);
+    }
+    static vec div_scalar(vec a, double b) {
+        return new vec(a.x/b, a.y/b, a.z/b);
+    }
+    static double dot(vec a, vec b) {
+        return (a.x*b.x+a.y*b.y+a.z*b.z);
+    }
+    static double mag(vec a) {
+        return Math.sqrt(y2(a.x) + y2(a.y) + y2(a.z));
+    }
+    /**
+     * since i keep doing ^2 and y is right under it...
+     * @param a value
+     * @return square of value
+     */
+    static double y2(double a) { return Math.pow(a,2); }
+    //todo
+    static vec cross(vec a, vec b) {
+        throw new UnsupportedOperationException("goaway bro im not gonna do this yet");
+        // return new vec(a.x-b.x,a.y-b.y,a.z-b.z);
+    }
+
+    //return nan if impossible.
+    static final double g = 9.80665;
+    static tp compute_rough_approx(vec p, vec t, vec v, double s) {
+        vec d = sub(t,p);
+        double T = mag(d)/s;
+        for (int i = 0; i < 10; ++i) {
+            vec u = add(sub(div_scalar(d, T),v),new vec(0,0,g*T/2));
+            double f = dot(u,u) - y2(s);
+            if (Math.abs(f) < 1e-6*s*s) break;
+            vec du = add(div_scalar(d, -T*T),new vec(0,0,g/2));
+            double fp = 2*dot(u,du);
+            if (fp < 1e-9) return new tp(Double.NaN, Double.NaN);
+            T = T - f/fp;
+        }
+        vec u = add(sub(div_scalar(d, T),v),new vec(0,0,g*T/2));
+        if (Math.abs(dot(u,u) - y2(s)) > 1e-6*s*s) return new tp(Double.NaN, Double.NaN);
+
+        return new tp(Math.atan2(u.y, u.x), Math.atan2(u.z,mag(new vec(u.x,u.y,0))));
+    }
 }
