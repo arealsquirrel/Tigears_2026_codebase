@@ -47,7 +47,8 @@ public class Movement {
         frontRightMotor = hardwareMap.dcMotor.get(FRONT_RIGHT_WHEEL_NAME);
 
         // trust me bro.
-        // backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

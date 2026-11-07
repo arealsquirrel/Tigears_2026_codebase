@@ -28,7 +28,7 @@ public class debug_movement extends LinearOpMode {
 
             double rotate = gamepad1.right_trigger - gamepad1.left_trigger;
             if(rotate == 0) { rotate = gamepad1.left_stick_x; }
-            movement.update(-rotate, gamepad1.right_stick_x, gamepad1.right_stick_y);
+            movement.update(-gamepad1.left_stick_y, gamepad1.left_stick_x, rotate);
 
 
             if(gamepad1.a) { what_change = ((what_change+1)%3); }
