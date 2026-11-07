@@ -5,6 +5,7 @@ public class config {
     /* ---------- LIME LIGHT ---------- */
     public static final String LIMELIGHT_NAME = "limelight";
     public static final int LIMELIGHT_PIPELINE_APRIL_TAG = 0;
+    public static final int LIMELIGHT_POLLING_RATE_HZ = 100;
 
     /* ---------- WHEELS ---------- */
     public static final String BACK_LEFT_WHEEL_NAME = "back_left_motor";
