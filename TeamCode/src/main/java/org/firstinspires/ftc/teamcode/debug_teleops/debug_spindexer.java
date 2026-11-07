@@ -30,7 +30,11 @@ public class debug_spindexer extends LinearOpMode {
             }
 
             spindexer.front_intake_servo_raised = gamepad1.a;
-            spindexer.back_turret_servo_raised = gamepad1.b;
+
+            if(gamepad1.b) {
+                spindexer.back_turret_servo_raised = gamepad1.b;
+                spindexer.back_intake_moving_move_param = 1;
+            }
         }
     }
 }
